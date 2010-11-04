@@ -41,7 +41,12 @@
             // resizeHeight
             function resizeHeight(iframe) {
                 // Set inline style to equal the body height of the iframed content plus a little
-                iframe.css('height', iframe.contents().find("body").height() + options.heightOffset);
+		try{
+			iframe.css('height', iframe.contents().find("body").height() + options.heightOffset);
+		}catch(e){
+			var newHeight = iframe.contentWindow.document.body.offsetHeight + options.heightOffset;
+                	iframe.style.height = newHeight + 'px';
+		}
             }
 
         }); // end
